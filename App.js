@@ -1,38 +1,33 @@
-/**
- * HMR- Hot Module Replacement
- * File Watcher Algorithm - C++
- * BUNDLING
- * MINIFY
- * Cleaning our code
- * Dev and Production build
- * Super Fast build algorithm
- * Image Optimization
- * Caching while development
- * Compression
- * Compatible with older version of browser
- * HTTPS on dev
- * port number
- * Consistent Hashing Algorithm
- * Zero Config
- *
- * Transitive Dependencies
- */
-
 import React from "react";
 import ReactDOM from "react-dom/client";
+
+// React Element is a javascript object
+// React.createElement => Object => HTML(DOM)
 const heading1 = React.createElement(
   "h1",
-  { id: "title" },
+  { id: "title", key: "h1" },
   "Heading 1 from Parcel!"
 );
-const heading2 = React.createElement("h2", { id: "title" }, "Heading 2!");
-const container = React.createElement("div", { id: "container" }, [
-  heading1,
-  heading2,
-]);
-console.log(container); // react element is a javascript object
+
+// JSX => React.createElement => Object => HTML(DOM)
+const title = <h2 key="h2">Heading 2!</h2>;
+
+// React Component
+// Functional - NEW
+// Class Based Component - OLD
+
+const HeaderComponent = () => {
+  return (
+    <div>
+      {title}
+      <h1>React functional component</h1>
+      <h2>This is h2 tag</h2>
+    </div>
+  );
+};
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 // pass react element inside the root
 // override everything inside root element and replace
-root.render(container);
+root.render(<HeaderComponent />);
