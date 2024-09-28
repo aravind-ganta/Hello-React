@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { restaurantList } from "../config";
 import RestrauntCard from "./RestaurantCard.js";
 import Shimmer from "./Shimmer.js";
+import { Link } from "react-router-dom";
 // what is state
 // what is Hooks? Normal function
 // what is useState
@@ -75,7 +76,12 @@ const Body = () => {
       <div className="restaurant-list">
         {filteredRestaurants.map((restaurant) => {
           return (
-            <RestrauntCard {...restaurant.info} key={restaurant.info.id} />
+            <Link
+              to={"/restaurant/" + restaurant.info.id}
+              key={restaurant.info.id}
+            >
+              <RestrauntCard {...restaurant.info} />
+            </Link>
           );
         })}
       </div>
