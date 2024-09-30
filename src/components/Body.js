@@ -3,17 +3,8 @@ import { restaurantList } from "../config";
 import RestrauntCard from "./RestaurantCard.js";
 import Shimmer from "./Shimmer.js";
 import { Link } from "react-router-dom";
-// what is state
-// what is Hooks? Normal function
-// what is useState
-
-function filterData(searchText, restaurants) {
-  const filterData = restaurants.filter((restaurant) =>
-    restaurant?.info?.name?.toLowerCase().includes(searchText.toLowerCase())
-  );
-  return filterData;
-}
-
+import { filterData } from "../utils/helper.js";
+import useOnline from "../utils/useOnline.js";
 const Body = () => {
   //   const searchTxt = "KFC";
   const [restaurants, setRestaurants] = useState([]);
@@ -41,6 +32,11 @@ const Body = () => {
   }
   console.log("render");
 
+  const isOnline=useOnline();
+
+  if (!isOnline){
+    return <h1>Offline, please check your internet connection!</h1>
+  }
   // Conditional Rendering
   // If my restaurant is empty => shimmer ui
   // if restaurant has data => actual data ui

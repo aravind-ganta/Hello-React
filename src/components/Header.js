@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Logo from "../assets/img/foodvilla.jpg";
 import { Link } from "react-router-dom";
+import useOnline from "../utils/useOnline";
 
 const authenticateUser = () => {
   return true;
@@ -20,6 +21,7 @@ export const Title = () => (
 const Header = () => {
   const [isLogIn, setIsLogIn] = useState(false);
   const [title, setTitle] = useState("Food Villa");
+  const isOnline=useOnline();
   // console.log("rendered");
   return (
     <div className="header">
@@ -38,8 +40,12 @@ const Header = () => {
             <li>Contact</li>
           </Link>
           <li>Cart</li>
+          <Link to="/instamart">
+            <li>Instamart</li>
+          </Link>
         </ul>
       </div>
+      <h1>{isOnline?"Online":"Offline"}</h1>
       {
         //JS Expressions & not Statements
         isLogIn ? (
