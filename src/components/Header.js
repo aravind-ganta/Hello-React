@@ -13,35 +13,35 @@ const authenticateUser = () => {
 // JSX => React.createElement => Object => HTML(DOM)
 export const Title = () => (
   <a href="/">
-    <img alt="logo" className="logo" src={Logo} />
+    <img alt="logo" className="h-28 p-2" src={Logo} />
   </a>
 );
 
 // React Component
 const Header = () => {
   const [isLogIn, setIsLogIn] = useState(false);
-  const [title, setTitle] = useState("Food Villa");
+  // const [title, setTitle] = useState("Food Villa");
   const isOnline=useOnline();
   // console.log("rendered");
   return (
-    <div className="header">
+    <div className="flex justify-between bg-pink-50 shadow-lg">
       <Title />
-      <h1>{title}</h1>
-      <button onClick={() => setTitle("New Food App")}>Change title</button>
+      {/* <h1>{title}</h1> */}
+      {/* <button onClick={() => setTitle("New Food App")}>Change title</button> */}
       <div className="nav-items">
-        <ul>
+        <ul className="flex py-10 px-10">
           <Link to="/">
-            <li>Home</li>
+            <li className="px-2">Home</li>
           </Link>
           <Link to="/about">
-            <li>About</li>
+            <li className="px-2">About</li>
           </Link>
           <Link to="/contact">
-            <li>Contact</li>
+            <li className="px-2">Contact</li>
           </Link>
-          <li>Cart</li>
+          <li className="px-2">Cart</li>
           <Link to="/instamart">
-            <li>Instamart</li>
+            <li className="px-2">Instamart</li>
           </Link>
         </ul>
       </div>
