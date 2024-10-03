@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useState } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
@@ -10,18 +10,23 @@ import Contact from "./components/Contact";
 import RestaurantMenu from "./components/RestaurantMenu";
 import Profile from "./components/ProfileClass";
 import Shimmer from "./components/Shimmer.js";
+import UserContext from "./utils/UserContext.js";
 
 //Chunking, Code Splitting, Dynamic Bundling,
 const Instamart = lazy(() => import("./components/Instamart"));
 
 // React.Fragment
 const AppLayout = () => {
+  const [user, setUser] = useState({
+    name: "Aravind Ganta",
+    email: "support@gmail.com",
+  });
   return (
-    <React.Fragment>
+    <UserContext.Provider value={{ user: user, setUser: setUser }}>
       <Header />
       <Outlet />
       <Footer />
-    </React.Fragment>
+    </UserContext.Provider>
   );
 };
 
@@ -56,7 +61,7 @@ const appRouter = createBrowserRouter([
       {
         path: "/instamart",
         element: (
-          <Suspense fallback={<Shimmer/>}>
+          <Suspense fallback={<Shimmer />}>
             <Instamart />
           </Suspense>
         ),

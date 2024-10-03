@@ -1,16 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { restaurantList } from "../config";
 import RestrauntCard from "./RestaurantCard.js";
 import Shimmer from "./Shimmer.js";
 import { Link } from "react-router-dom";
 import { filterData } from "../utils/helper.js";
 import useOnline from "../utils/useOnline.js";
+import UserContext from "../utils/UserContext.js";
 const Body = () => {
   //   const searchTxt = "KFC";
   const [restaurants, setRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   // searchText is a local state variable
   const [searchText, setSearchText] = useState(""); // To create state variables,
+  const { user, setUser } = useContext(UserContext);
 
   useEffect(() => {
     // API call
@@ -32,10 +34,10 @@ const Body = () => {
   }
   console.log("render");
 
-  const isOnline=useOnline();
+  const isOnline = useOnline();
 
-  if (!isOnline){
-    return <h1>Offline, please check your internet connection!</h1>
+  if (!isOnline) {
+    return <h1>Offline, please check your internet connection!</h1>;
   }
   // Conditional Rendering
   // If my restaurant is empty => shimmer ui
@@ -68,6 +70,24 @@ const Body = () => {
         >
           Search
         </button>
+        <input
+          value={user.name}
+          onChange={(e) =>
+            setUser({
+              ...user,
+              name: e.target.value,
+            })
+          }
+        ></input>
+        <input
+          value={user.email}
+          onChange={(e) =>
+            setUser({
+              ...user,
+              email: e.target.value,
+            })
+          }
+        ></input>
       </div>
       <div className="flex flex-wrap">
         {filteredRestaurants.map((restaurant) => {

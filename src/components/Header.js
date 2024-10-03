@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Logo from "../assets/img/foodvilla.jpg";
 import { Link } from "react-router-dom";
 import useOnline from "../utils/useOnline";
-
+import UserContext from "../utils/UserContext";
 const authenticateUser = () => {
   return true;
 };
@@ -22,6 +22,7 @@ const Header = () => {
   const [isLogIn, setIsLogIn] = useState(false);
   // const [title, setTitle] = useState("Food Villa");
   const isOnline=useOnline();
+  const {user}=useContext(UserContext);
   // console.log("rendered");
   return (
     <div className="flex justify-between bg-pink-50 shadow-lg">
@@ -46,6 +47,7 @@ const Header = () => {
         </ul>
       </div>
       <h1>{isOnline?"Online":"Offline"}</h1>
+      <h1 className="p-10 font-bold text-red-900">{user.name}</h1>
       {
         //JS Expressions & not Statements
         isLogIn ? (
