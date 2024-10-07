@@ -4,7 +4,6 @@ import RestrauntCard from "./RestaurantCard.js";
 import Shimmer from "./Shimmer.js";
 import { Link } from "react-router-dom";
 import { filterData } from "../utils/helper.js";
-import useOnline from "../utils/useOnline.js";
 import UserContext from "../utils/UserContext.js";
 const Body = () => {
   //   const searchTxt = "KFC";
@@ -32,21 +31,15 @@ const Body = () => {
       json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
   }
-  console.log("render");
-
-  const isOnline = useOnline();
-
-  if (!isOnline) {
-    return <h1>Offline, please check your internet connection!</h1>;
-  }
+  if (!restaurants) return null;
   // Conditional Rendering
   // If my restaurant is empty => shimmer ui
   // if restaurant has data => actual data ui
 
-  if (filteredRestaurants?.length === 0) {
-    return <h1>No Restaurant match found!!!</h1>;
-  }
-  return restaurants.length === 0 ? (
+  // if (filteredRestaurants?.length === 0) {
+  //   return <h1>No Restaurant match found!!!</h1>;
+  // }
+  return restaurants?.length === 0 ? (
     <Shimmer />
   ) : (
     <>
@@ -61,6 +54,7 @@ const Body = () => {
         />
         <button
           className="p-1 m-1 text-white bg-green-600 rounded-md hover:bg-green-500"
+          data-testid="search-btn"
           onClick={() => {
             // need to filter the data
             const data = filterData(searchText, restaurants);
@@ -89,7 +83,7 @@ const Body = () => {
           }
         ></input>
       </div>
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap" data-testid="res-list">
         {filteredRestaurants.map((restaurant) => {
           return (
             <Link

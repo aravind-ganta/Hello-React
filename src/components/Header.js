@@ -14,7 +14,7 @@ const authenticateUser = () => {
 // JSX => React.createElement => Object => HTML(DOM)
 export const Title = () => (
   <a href="/">
-    <img alt="logo" className="h-28 p-2" src={Logo} />
+    <img data-testid="logo" alt="logo" className="h-28 p-2" src={Logo} />
   </a>
 );
 
@@ -46,11 +46,11 @@ const Header = () => {
             <li className="px-2">Instamart</li>
           </Link>
           <Link to="/cart">
-          <li className="px-2">Cart-{cartItems.length}</li>
+          <li className="px-2" data-testid="cart">Cart-{cartItems.length}</li>
           </Link>
         </ul>
       </div>
-      <h1>{isOnline ? "Online" : "Offline"}</h1>
+      <h1 data-testid="online-status">{isOnline ? "Online" : "Offline"}</h1>
       <h1 className="p-10 font-bold text-red-900">{user.name}</h1>
       {
         //JS Expressions & not Statements
